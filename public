@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonw X Cloud | Professional VPS Solutions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 0% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-bottom: 40px;
+        }
+
+        /* --- Hero / Intro Section --- */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: -1;
+        }
+
+        .app-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 30px;
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .main-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.3));
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.6;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 15px;
+        }
+
+        /* --- Main Card --- */
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.6s ease-out;
+            margin-bottom: 40px;
+        }
+
+        /* --- Navigation & Form --- */
+        .nav-tabs {
+            display: flex;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 5px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .nav-tab.active {
+            background: var(--card-bg);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .nav-tab:hover:not(.active) { color: white; }
+
+        .form-group { margin-bottom: 25px; }
+        .form-label { display: block; margin-bottom: 10px; color: var(--text-main); font-weight: 500; font-size: 14px; }
+        .input-wrapper { position: relative; }
+        
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 16px 16px 45px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+        .form-input:focus + .input-icon { color: var(--primary); }
+
+        .create-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px -6px rgba(59, 130, 246, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .create-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px -8px rgba(59, 130, 246, 0.6); filter: brightness(1.1); }
+        .create-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; filter: grayscale(0.5); }
+
+        /* --- Progress & Status --- */
+        .progress-container { margin-top: 25px; display: none; }
+        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--primary)); width: 0%; transition: width 0.4s ease; box-shadow: 0 0 10px var(--primary); }
+        
+        .status-message { margin-top: 20px; padding: 16px; border-radius: 12px; font-size: 14px; display: flex; align-items: center; gap: 12px; line-height: 1.4; }
+        .status-success { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .status-error { background: rgba(239, 68, 68, 0.1); color: var(--error); border: 1px solid rgba(239, 68, 68, 0.2); }
+        .status-info { background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
+
+        /* --- Result Link --- */
+        .vps-link-card { margin-top: 25px; background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.0) 100%); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 16px; padding: 24px; text-align: center; animation: fadeIn 0.5s; }
+        .vps-url { display: block; margin: 15px 0; padding: 14px; background: #0f172a; border: 1px dashed var(--border); border-radius: 10px; color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 13px; word-break: break-all; transition: all 0.2s; }
+        .vps-url:hover { color: white; border-color: var(--accent); background: #162032; }
+
+        /* --- Features Grid --- */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .feature-item { display: flex; align-items: center; font-size: 13px; color: var(--text-muted); padding: 8px; border-radius: 8px; transition: background 0.2s; }
+        .feature-item:hover { background: rgba(255,255,255,0.03); }
+        .feature-item i { color: var(--accent); margin-right: 12px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; background: rgba(6, 182, 212, 0.1); border-radius: 6px; font-size: 12px; }
+
+        /* --- PROFESSIONAL FOOTER SECTION (ATTRIBUTION) --- */
+        .dev-footer {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .dev-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+        }
+
+        .dev-title {
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .dev-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .dev-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+        }
+
+        .dev-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .attribution-box {
+            background: rgba(255,255,255,0.03);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .attribution-role {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .attribution-name {
+            font-size: 14px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .dev-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-repo {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-main);
+        }
+        
+        .btn-repo:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        .btn-author {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.1), rgba(192, 38, 211, 0.1));
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-author:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* --- Animations & Utility --- */
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .loading-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px; }
+        
+        /* User List Styles */
+        .user-item { background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border); padding: 16px; border-radius: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+        .user-item:hover { border-color: var(--primary); background: rgba(15, 23, 42, 0.8); transform: translateX(5px); }
+        .user-token { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+        .user-link-btn { padding: 8px 16px; background: rgba(59, 130, 246, 0.1); color: var(--primary); text-decoration: none; border-radius: 8px; font-size: 12px; font-weight: 600; transition: all 0.2s; border: 1px solid transparent; }
+        .user-link-btn:hover { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+
+        @media (max-width: 600px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .container { width: 95%; padding: 10px; }
+            .main-title { font-size: 36px; }
+            .card { padding: 20px; }
+            .dev-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="hero-section">
+            <span class="app-badge"><i class="fas fa-bolt"></i> Fast & Secure</span>
+            <h1 class="main-title">Sonw X Cloud</h1>
+            <p class="description">
+                Nền tảng tạo máy ảo Windows Server tốc độ cao miễn phí. 
+                Vận hành ổn định trên hạ tầng GitHub Actions.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="switchTab('create')">
+                    <i class="fas fa-plus-circle"></i> Khởi tạo VPS
+                </button>
+                <button class="nav-tab" onclick="switchTab('manage')">
+                    <i class="fas fa-server"></i> Quản lý Server
+                </button>
+            </div>
+
+            <div id="create-tab" class="tab-content active">
+                <form id="vpsForm">
+                    <div class="form-group">
+                        <label class="form-label">GitHub Personal Access Token</label>
+                        <div class="input-wrapper">
+                            <i class="fab fa-github input-icon"></i>
+                            <input 
+                                type="password" 
+                                id="githubToken" 
+                                class="form-input" 
+                                placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                                required
+                            >
+                        </div>
+                        <div style="margin-top: 10px; font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-info-circle"></i> Yêu cầu quyền: <strong>repo, workflow</strong>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="create-btn" id="createBtn">
+                        <i class="fas fa-rocket"></i> Deploy Sonw X Server
+                    </button>
+
+                    <div class="progress-container" id="progressBar">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; color: var(--text-muted);">
+                            <span>Status</span>
+                            <span id="progressText">Initializing...</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="statusMessage"></div>
+                <div id="vpsLink"></div>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fab fa-windows"></i> <span>Windows Server GUI</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-globe"></i> <span>NoVNC Web Access</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i> <span>Uptime ~6 Hours</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-key"></i> <span>Pass: <strong>hieudz</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="manage-tab" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-size: 16px; font-weight: 600; color: white;">Active Sessions</h3>
+                    <button onclick="loadVpsUsers()" class="create-btn" style="width: auto; padding: 10px 20px; font-size: 13px; height: auto;">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                
+                <div id="usersList">
+                    <div style="text-align: center; padding: 40px 20px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: 12px; background: rgba(15, 23, 42, 0.3);">
+                        <i class="fas fa-server" style="font-size: 32px; margin-bottom: 15px; opacity: 0.3; display: block;"></i>
+                        <p>Nhấn nút Refresh để tải danh sách VPS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dev-footer">
+            <div class="dev-header">
+                <i class="fas fa-info-circle" style="color: var(--accent);"></i>
+                <div class="dev-title">Thông tin Dịch vụ & Bản quyền</div>
+                <div class="dev-badge">Open Source</div>
+            </div>
+            
+            <div class="dev-content">
+                <div class="dev-info">
+                    <div style="margin-bottom: 15px;">
+                        <span class="attribution-role">Đơn vị vận hành</span>
+                        <div class="attribution-name" style="color: var(--primary);">Sonw X Cloud</div>
+                        <p style="margin-top: 5px; font-size: 12px;">
+                            Cung cấp nền tảng và giao diện người dùng để triển khai máy ảo tự động.
+                        </p>
+                    </div>
+
+                    <div class="attribution-box">
+                        <span class="attribution-role">Tác giả Mã nguồn (Core System)</span>
+                        <div class="attribution-name">Hiếu DZ</div>
+                        <p style="margin-top: 5px; font-size: 12px; color: #cbd5e1;">
+                            Kiến trúc hệ thống lõi và Workflow được sáng tạo và phát triển bởi Hiếu DZ.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="dev-actions">
+                    <a href="https://github.com/Nguoibianhz/VPS-Github" target="_blank" class="action-btn btn-repo">
+                        <i class="fab fa-github-alt"></i> 
+                        <span>Github Source Code</span>
+                    </a>
+                    <a href="https://github.com/Nguoibianhz" target="_blank" class="action-btn btn-author">
+                        <i class="fas fa-code"></i>
+                        <span>Profile Tác giả (Hiếu DZ)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const API_BASE = '/api';
+        
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab + '-tab').classList.add('active');
+        }
+
+        function updateProgress(percent, text = null) {
+            const container = document.getElementById('progressBar');
+            const fill = document.getElementById('progressFill');
+            const textEl = document.getElementById('progressText');
+            
+            container.style.display = 'block';
+            fill.style.width = percent + '%';
+            if(text) textEl.innerText = text;
+        }
+
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('statusMessage');
+            const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'triangle-exclamation' : 'circle-info';
+            statusDiv.innerHTML = `<div class="status-message status-${type}">
+                <i class="fas fa-${icon}"></i>
+                <span>${message}</span>
+            </div>`;
+        }
+
+        function showVpsLink(url) {
+            const linkDiv = document.getElementById('vpsLink');
+            linkDiv.innerHTML = `
+                <div class="vps-link-card">
+                    <div style="font-weight: 700; color: var(--success); margin-bottom: 8px; font-size: 16px;">
+                        <i class="fas fa-check-circle"></i> Server is Ready!
+                    </div>
+                    <a href="${url}" target="_blank" class="vps-url">${url}</a>
+                    <div style="font-size: 13px; color: var(--text-muted); background: rgba(0,0,0,0.2); padding: 8px; border-radius: 6px; display: inline-block;">
+                        <i class="fas fa-key"></i> Password: <strong style="color: white; margin-left: 5px;">hieudz</strong>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('vpsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const githubToken = document.getElementById('githubToken').value;
+            const createBtn = document.getElementById('createBtn');
+            const originalBtnText = createBtn.innerHTML;
+            
+            if (!githubToken) {
+                showStatus('Vui lòng nhập GitHub Token!', 'error');
+                return;
+            }
+
+            if (!githubToken.startsWith('ghp_') && !githubToken.startsWith('github_pat_')) {
+                showStatus('Token không hợp lệ! Phải bắt đầu bằng "ghp_" hoặc "github_pat_"', 'error');
+                return;
+            }
+
+            try {
+                createBtn.disabled = true;
+                createBtn.innerHTML = '<span class="loading-spinner"></span> Deploying...';
+                showStatus('Đang kết nối tới GitHub API...', 'info');
+                updateProgress(10, 'Connecting...');
+
+                const response = await fetch(`${API_BASE}/create-vps`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ github_token: githubToken })
+                });
+
+                const data = await response.json();
+                updateProgress(30, 'Creating Workflow...');
+
+                if (response.ok) {
+                    showStatus(`✅ Repository created: ${data.repository}. Đang khởi động VPS...`, 'success');
+                    updateProgress(45, 'Booting Server...');
+                    pollVpsStatus(githubToken);
+                } else {
+                    throw new Error(data.error || 'Lỗi không xác định');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                showStatus(`❌ Error: ${error.message}`, 'error');
+                updateProgress(0);
+                createBtn.disabled = false;
+                createBtn.innerHTML = originalBtnText;
+            }
+        });
+
+        async function pollVpsStatus(githubToken) {
+            const maxAttempts = 40; 
+            let attempts = 0;
+
+            const pollInterval = setInterval(async () => {
+                attempts++;
+                if (attempts < 30) updateProgress(45 + (attempts * 1.5), 'Installing Windows...');
+
+                try {
+                    const response = await fetch(`${API_BASE}/vpsuser`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ github_token: githubToken })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.remote_link && !data.remote_link.includes('TUNNEL_FAILED')) {
+                        clearInterval(pollInterval);
+                        updateProgress(100, 'Completed!');
+                        showStatus('🎉 Sonw X Server đã sẵn sàng!', 'success');
+                        showVpsLink(data.remote_link);
+                        
+                        document.getElementById('createBtn').innerHTML = '<i class="fas fa-check"></i> Hoàn tất';
+                        document.getElementById('createBtn').style.background = 'var(--success)';
+                        
+                        setTimeout(() => {
+                            window.open(data.remote_link, '_blank');
+                        }, 2500);
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(pollInterval);
+                        showStatus('⏰ Timeout: Server phản hồi quá lâu. Vui lòng thử lại sau.', 'error');
+                        document.getElementById('createBtn').disabled = false;
+                        document.getElementById('createBtn').innerHTML = 'Thử lại';
+                    } 
+
+                } catch (error) {
+                    console.log(`Poll failed:`, error);
+                }
+            }, 8000);
+        }
+
+        async function loadVpsUsers() {
+            const usersList = document.getElementById('usersList');
+            usersList.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--text-muted);"><span class="loading-spinner"></span> Đang tải dữ liệu...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/vpsuser`);
+                const data = await response.json();
+
+                if (response.ok && data.users && data.users.length > 0) {
+                    usersList.innerHTML = `
+                        <div style="margin-bottom: 15px; text-align: center; font-size: 14px; color: var(--text-muted);">
+                            Running Servers: <strong style="color: var(--success)">${data.total}</strong>
+                        </div>
+                        <div style="max-height: 300px; overflow-y: auto; padding-right: 5px;">
+                            ${data.users.map(user => `
+                                <div class="user-item">
+                                    <div class="user-token">
+                                        <i class="fab fa-github" style="color: var(--text-muted);"></i>
+                                        ${user.token.substring(0, 6)}...${user.token.slice(-4)}
+                                    </div>
+                                    <a href="${user.link}" target="_blank" class="user-link-btn">
+                                        Connect <i class="fas fa-arrow-right" style="margin-left: 4px;"></i>
+                                    </a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    usersList.innerHTML = `
+                        <div style="text-align: center; padding: 30px; color: var(--text-muted);">
+                            <i class="fas fa-box-open" style="font-size: 32px; margin-bottom: 10px; opacity: 0.5;"></i>
+                            <p>Không tìm thấy máy chủ nào</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                usersList.innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: var(--error);">
+                        <i class="fas fa-wifi" style="margin-bottom: 5px;"></i><br>
+                        Lỗi kết nối
+                    </div>
+                `;
+            }
+        }
+
+        document.getElementById('githubToken').focus();
+    </script>
+</body>
+</html>
